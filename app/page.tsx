@@ -25,7 +25,7 @@ const Home = () => {
        const interval = setInterval(()=>{
         console.log("refreshing token...");
         getToken();
-       }, 57*60*1000);
+       }, 58*60*1000);
 
        return ()=> clearInterval(interval);
 

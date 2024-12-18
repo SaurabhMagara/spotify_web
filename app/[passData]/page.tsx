@@ -27,7 +27,7 @@ const Albums = () => {
 
       setLoading(true);
       
-      const baseUrl = `${process.env.BASE_URL}/api/v1/${passData}`;
+      const baseUrl = `/api/v1/${passData}`;
       const url = passData === "albums" ? `${baseUrl}/${searchInput}` : `${baseUrl}?name=${searchInput}`;
       const res = await axios.post(url, {}, { withCredentials: true });
       setData(res.data.data);
@@ -42,7 +42,7 @@ const Albums = () => {
   const getSampleData = async () => {
     setLoading(true);
     try {
-      const baseUrl = `http://localhost:5000/api/v1/${passData}`;
+      const baseUrl = `/api/v1/${passData}`;
       const url = passData === "new-releases" 
         ? baseUrl 
         : passData === "albums" 
@@ -96,7 +96,7 @@ const Albums = () => {
         </div>
       ) : (
         <section className="flex flex-wrap justify-evenly items-center gap-5 w-10/12 sm:w-9/12 pt-2 sm:pt-5">
-          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 md:grid-cols-3 text-gray-300 w-full">
+          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 md:grid-cols-3 text-gray-300 w-full sm:pb-4">
             {data?.map(value => (
               <AlbumCard key={value.id} name={value.name} url={value.images[0]?.url} followers={value.followers?.total} tracks={value.total_tracks} passData={passData} spotify={value.external_urls.spotify} />
             ))}
@@ -120,7 +120,7 @@ export const AlbumCard = ({ url, name, followers, tracks, passData, spotify }: p
         <img 
           src={url} 
           alt={name} 
-          className="h-[64px] w-[64px] sm:h-[300px] sm:w-full object-cover rounded-l-xl sm:rounded-t-xl sm:transition-transform sm:duration-300 sm:hover:scale-110" 
+          className="h-[64px] w-[64px] sm:h-[300px] sm:w-full object-cover rounded-l-xl sm:rounded-t-xl sm:rounded-l-none sm:transition-transform sm:duration-300 sm:hover:scale-110" 
         />
       ) : ( 
         <div 

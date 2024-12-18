@@ -7,7 +7,6 @@ import Divider from "@/components/Divider"
 import toast, { Toaster } from "react-hot-toast";
 import { Bars } from "react-loader-spinner";
 import Link from "next/link";
-// import '@/envConfig.ts'
 
 const Categorie = () => {
 
@@ -39,7 +38,6 @@ const Categorie = () => {
         
         try {
             const res = await axios.post(`/api/v1/categories`, {}, { withCredentials: true });
-            console.log(res);
 
             const newData = res.data.data.filter((value: { name: string }) => value.name !== `New Releases`);
             setData(newData);

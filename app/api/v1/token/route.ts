@@ -23,9 +23,9 @@ export async function GET (req : NextRequest){
 
         cookie.set("token", response.data.access_token, {httpOnly :true, maxAge : 58*60*1000});
         return NextResponse.json({message : "Token generated"});
-        
+
     } catch (error) {
         console.log(error);
-        return NextResponse.json({message : "error getting error", error: error})
+        return NextResponse.json({message : "error while getting token", error: error})
     }
 }

@@ -8,7 +8,6 @@ import { NextRequest, NextResponse } from "next/server";
 export async function POST(req: NextRequest) {
     const cookie = await cookies();
     const token = cookie.get("token")?.value;
-    console.log("token", token);
     
     if (!token) {
         return NextResponse.json({ message: "Token not found" })
