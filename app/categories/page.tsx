@@ -5,8 +5,8 @@ import React from "react";
 import { Categories } from "@/types/types";
 import Divider from "@/components/Divider"
 import toast, { Toaster } from "react-hot-toast";
-import { Bars } from "react-loader-spinner";
 import Link from "next/link";
+import Loader from "@/components/Loader";
 
 const Categorie = () => {
 
@@ -35,7 +35,7 @@ const Categorie = () => {
 
     const getCategories = async () => {
         setLoading(true);
-        
+
         try {
             const res = await axios.post(`/api/v1/categories`, {}, { withCredentials: true });
 
@@ -46,8 +46,8 @@ const Categorie = () => {
         } catch (error) {
             // console.log(error);
             toast.error("Something went wrong");
-            
-        }finally{
+
+        } finally {
             setLoading(false);
         }
     }
@@ -92,15 +92,8 @@ const Categorie = () => {
                 </div>
                 {loading ?
                     <div className="h-[600px] w-full flex justify-center items-center">
-                        <Bars
-                            height="80"
-                            width="80"
-                            color="#4fa94d"
-                            ariaLabel="bars-loading"
-                            wrapperStyle={{}}
-                            wrapperClass=""
-                            visible={true}
-                        /> </div>
+                        <Loader />
+                    </div>
                     :
                     <div className="grid grid-cols-2 sm:grid-cols-3 gap-5 sm:w-11/12 text-gray-300 w-full h-full">
 

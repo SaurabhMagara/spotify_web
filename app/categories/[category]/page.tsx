@@ -5,9 +5,10 @@ import Divider from "@/components/Divider";
 import axios from "axios";
 import React from "react";
 import { Album } from "@/types/types";
-import { Bars } from "react-loader-spinner";
+
 import { useParams } from "next/navigation";
 import { AlbumCard } from "@/app/[passData]/page";
+import Loader from "@/components/Loader";
 
 const CategoriesPage = () => {
     const { category } = useParams();
@@ -32,15 +33,15 @@ const CategoriesPage = () => {
 
     const decodeParam = (param: string | string[] | undefined): string => {
         if (!param) return '';
-    
+
         // If the param is an array, decode each item
         if (Array.isArray(param)) {
-          return param.map(p => decodeURIComponent(p)).join(' ');
+            return param.map(p => decodeURIComponent(p)).join(' ');
         }
-    
+
         // If it's a single string, just decode it
         return decodeURIComponent(param);
-      };
+    };
 
     React.useEffect(() => {
         getResponse();
@@ -54,7 +55,7 @@ const CategoriesPage = () => {
 
             <header className="flex justify-center items-center w-3/4 py-3 sm:py-4">
                 <h1 className="text-gray-200 font-bold text-3xl sm:text-4xl md:text-5xl text-center">
-                    {title.slice(1,title?.length)}
+                    {title.slice(1, title?.length)}
                 </h1>
             </header>
 
@@ -62,15 +63,8 @@ const CategoriesPage = () => {
 
             {loading ?
                 <div className="h-[600px] w-full flex justify-center items-center">
-                    <Bars
-                        height="80"
-                        width="80"
-                        color="#4fa94d"
-                        ariaLabel="bars-loading"
-                        wrapperStyle={{}}
-                        wrapperClass=""
-                        visible={true}
-                    /> </div>
+                    <Loader />
+                </div>
                 : <div className="flex justify-evenly items-center flex-wrap gap-3 sm:gap-5 w-10/12 sm:w-10/12 md:w-9/12 pt-2 sm:pt-5">
                     <div className="grid grid-cols-1 sm gap-5 lg:grid-cols-3 sm:grid-cols-2 text-gray-300 w-full h-full sm:pb-4">
                         {

@@ -5,8 +5,8 @@ import { GoSearch } from "react-icons/go";
 import { Album, propData } from "@/types/types";
 import toast, { Toaster } from "react-hot-toast";
 import Divider from "@/components/Divider";
-import { Bars } from 'react-loader-spinner';
 import { useParams } from "next/navigation";
+import Loader from "@/components/Loader";
 
 const Albums = () => {
   const [searchInput, setSearchInput] = React.useState('');
@@ -92,7 +92,7 @@ const Albums = () => {
 
       {loading ? (
         <div className="flex justify-center items-center h-[600px] w-full">
-          <Bars height="80" width="80" color="#4fa94d" ariaLabel="bars-loading" visible={true} />
+          <Loader/>
         </div>
       ) : (
         <section className="flex flex-wrap justify-evenly items-center gap-5 w-10/12 sm:w-9/12 pt-2 sm:pt-5">
