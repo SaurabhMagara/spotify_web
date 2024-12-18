@@ -8,11 +8,16 @@ export async function POST(req : NextRequest){
     try {
         const cookie = await cookies();
         const token = cookie.get("token")?.value;
-        const category = req.nextUrl
+        const {searchParams} = new URL(req.url);
+        const category = searchParams.get("category")
 
         if (!token) {
             return NextResponse.json({ message: "albums err : Token is missing" })
         }    
+
+        if(!category){
+            return NextResponse.json({message : "albums err : query param is missing"});
+        }
         
         const response = await axios.get(`https://api.spotify.com/v1/search?q=${category}&type=album&limit=30`,
             {

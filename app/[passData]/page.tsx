@@ -28,7 +28,7 @@ const Albums = () => {
       setLoading(true);
       
       const baseUrl = `/api/v1/${passData}`;
-      const url = passData === "albums" ? `${baseUrl}/${searchInput}` : `${baseUrl}?name=${searchInput}`;
+      const url = passData === "albums" ? `${baseUrl}?category=${searchInput}` : `${baseUrl}?name=${searchInput}`;
       const res = await axios.post(url, {}, { withCredentials: true });
       setData(res.data.data);
     } catch (error) {
@@ -46,7 +46,7 @@ const Albums = () => {
       const url = passData === "new-releases" 
         ? baseUrl 
         : passData === "albums" 
-        ? `${baseUrl}/90shindi` 
+        ? `${baseUrl}?category=90shindi` 
         : `${baseUrl}?name=arijitsingh`;
       
       const res = await axios.post(url, {}, { withCredentials: true });

@@ -10,27 +10,42 @@ import { useParams } from "next/navigation";
 import { AlbumCard } from "@/app/[passData]/page";
 
 const CategoriesPage = () => {
-    const { id } = useParams();
+    const { category } = useParams();
     const [data, setData] = React.useState<Album[]>([]);
     const [loading, setLoading] = React.useState(false);
+    const [title, setTitle] = React.useState("");
 
     const getResponse = async () => {
         setLoading(true);
         try {
-            const res = await axios.post(`http://localhost:5000/api/v1//albums/${id}`, {}, { withCredentials: true });
+            const res = await axios.post(`/api/v1/categories/${category}`, {}, { withCredentials: true });
             setData(res.data.data);
             setLoading(false);
         } catch (error) {
             console.log(error);
             toast.error("Something went wrong");
-           
-        }finally{
+
+        } finally {
             setLoading(false);
         }
     }
 
+    const decodeParam = (param: string | string[] | undefined): string => {
+        if (!param) return '';
+    
+        // If the param is an array, decode each item
+        if (Array.isArray(param)) {
+          return param.map(p => decodeURIComponent(p)).join(' ');
+        }
+    
+        // If it's a single string, just decode it
+        return decodeURIComponent(param);
+      };
+
     React.useEffect(() => {
         getResponse();
+        setTitle(decodeParam(category));
+
     }, [])
 
     return (
@@ -39,7 +54,7 @@ const CategoriesPage = () => {
 
             <header className="flex justify-center items-center w-3/4 py-3 sm:py-4">
                 <h1 className="text-gray-200 font-bold text-3xl sm:text-4xl md:text-5xl text-center">
-                    {id?.slice(3,id.length)}
+                    {title.slice(1,title?.length)}
                 </h1>
             </header>
 
