@@ -7,8 +7,8 @@ import React from "react";
 import { Album } from "@/types/types";
 
 import { useParams } from "next/navigation";
-import { AlbumCard } from "@/app/[passData]/page";
 import Loader from "@/components/Loader";
+import AlbumCard from "@/components/AlbumCard";
 
 const CategoriesPage = () => {
     const { category } = useParams();
