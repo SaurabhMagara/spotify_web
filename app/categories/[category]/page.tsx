@@ -5,13 +5,16 @@ import Divider from "@/components/Divider";
 import axios from "axios";
 import React from "react";
 import { Album } from "@/types/types";
-
-import { useParams } from "next/navigation";
 import Loader from "@/components/Loader";
 import AlbumCard from "@/components/AlbumCard";
+import { useParams } from "next/navigation";
 
-const CategoriesPage = () => {
-    const { category } = useParams();
+interface CategoryPageProps {
+    params: Promise<{ category: string }>
+}
+
+const CategoriesPage = ({params} : CategoryPageProps) => {
+    const {category} = useParams();
     const [data, setData] = React.useState<Album[]>([]);
     const [loading, setLoading] = React.useState(false);
     const [title, setTitle] = React.useState("");
@@ -19,7 +22,8 @@ const CategoriesPage = () => {
     const getResponse = async () => {
         setLoading(true);
         try {
-            const res = await axios.post(`/api/v1/categories/${category}`, {}, { withCredentials: true });
+            const res = await axios.post(`/api/v1/categories/${category?.slice(3, category.length)}`, {}, { withCredentials: true });
+            console.log(res);
             setData(res.data.data);
             setLoading(false);
         } catch (error) {
@@ -66,13 +70,14 @@ const CategoriesPage = () => {
                     <Loader />
                 </div>
                 : <div className="flex justify-evenly items-center flex-wrap gap-3 sm:gap-5 w-10/12 sm:w-10/12 md:w-9/12 pt-2 sm:pt-5">
-                    <div className="grid grid-cols-1 sm gap-5 lg:grid-cols-3 sm:grid-cols-2 text-gray-300 w-full h-full sm:pb-4">
-                        {
-                            data.map((value) => {
-                                return <AlbumCard key={value.id} name={value.name} url={value.images[0].url} spotify={value.external_urls.spotify} tracks={value.total_tracks} />
-                            })
-                        }
-                    </div>
+                    {!data ? <div className="flex justify-center items-center h-96 w-full text-neutral-200 text-3xl"> No Results 😔</div> :
+                        <div className="grid grid-cols-1 sm gap-5 lg:grid-cols-3 sm:grid-cols-2 text-gray-300 w-full h-full sm:pb-4">
+                            {
+                                data?.map((value) => {
+                                    return <AlbumCard key={value.id} name={value.name} url={value.images[0].url} spotify={value.external_urls.spotify} tracks={value.total_tracks} />
+                                })
+                            }
+                        </div>}
                 </div>}
         </div>
     )

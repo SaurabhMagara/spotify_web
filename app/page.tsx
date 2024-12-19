@@ -18,17 +18,7 @@ const Home = () => {
     }
 
     React.useEffect(() => {
-
         getToken();
-
-       // making interval for generating token before its expiry
-       const interval = setInterval(()=>{
-        console.log("refreshing token...");
-        getToken();
-       }, 58*60*1000);
-
-       return ()=> clearInterval(interval);
-
     }, []);
 
     return (
