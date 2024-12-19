@@ -23,7 +23,6 @@ const CategoriesPage = ({params} : CategoryPageProps) => {
         setLoading(true);
         try {
             const res = await axios.post(`/api/v1/categories/${category?.slice(3, category.length)}`, {}, { withCredentials: true });
-            console.log(res);
             setData(res.data.data);
             setLoading(false);
         } catch (error) {

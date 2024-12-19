@@ -10,8 +10,7 @@ const Home = () => {
     const getToken = async () => {
 
         try {
-            const res = await axios.get(`/api/v1/token`,{withCredentials : true});
-            console.log(res);
+            await axios.get(`/api/v1/token`, { withCredentials: true });
         } catch (error) {
             console.log("error while getting access token : ", error);
         }

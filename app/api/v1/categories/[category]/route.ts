@@ -5,11 +5,11 @@ import axios from "axios";
 import { cookies } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
 
-export async function POST(req: NextRequest,{ params }: { params: { category: string } }) {
+export async function POST(req: NextRequest) {
     try {
         const cookie = await cookies();
         const token = cookie.get("token")?.value;
-        const {category} = await params;
+        const category = req.nextUrl.pathname.slice(19,req.nextUrl.pathname.length);      
 
         if (!token) {
             return NextResponse.json({status : 400, message: "category err : token is missing" });

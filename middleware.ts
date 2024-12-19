@@ -7,8 +7,6 @@ export async function middleware(req: NextRequest) {
         // Check for the existing token in cookies
         const token = req.cookies.get("token")?.value;
 
-        console.log("middleware hitted");
-
         if (token) {
             // If token exists, allow the request to proceed
             return NextResponse.next();
