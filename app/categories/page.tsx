@@ -37,9 +37,10 @@ const Categorie = () => {
         setLoading(true);
 
         try {
-            const res = await axios.post(`/api/v1/categories`, {}, { withCredentials: true });
+            const res  = await axios.post(`/api/v1/categories`, {}, { withCredentials: true });
 
-            const newData = res.data.data.filter((value: { name: string }) => value.name !== `New Releases`);
+            const newData  = res.data.data.filter((value: { name: string }) => value.name !== `New Releases` && value.name !== "Dance/Electronic");
+            
             setData(newData);
             setLoading(false);
 
@@ -94,7 +95,7 @@ const Categorie = () => {
                         <Loader />
                     </div>
                     :
-                    <div className="grid grid-cols-2 sm:grid-cols-3 gap-5 sm:w-11/12 text-gray-300 w-full h-full">
+                    <section className="grid grid-cols-2 sm:grid-cols-3 gap-5 sm:w-11/12 text-gray-300 w-full h-full pb-5">
 
                         {
                             data.map((value, i) => {
@@ -111,7 +112,7 @@ const Categorie = () => {
                                 )
                             })
                         }
-                    </div>}
+                    </section>}
             </div>
         </div>
     )
