@@ -14,7 +14,7 @@ const AlbumCard = ({ url, name, followers, tracks, passData, spotify }: propData
           />
         ) : ( 
           <div 
-            className="h-[64px] w-[64px] sm:h-[300px] sm:w-full flex items-center justify-center bg-gradient-to-br from-cyan-700 to-cyan-950 text-2xl font-semibold text-gray-300 rounded-l-xl sm:rounded-t-xl sm:rounded-l-none">
+            className="h-[64px] w-[64px] sm:h-[300px] sm:w-full flex items-center justify-center bg-gradient-to-br from-cyan-700 to-cyan-950 text-xs sm:text-3xl font-semibold sm:font-bold text-gray-300 rounded-l-xl sm:rounded-t-xl sm:rounded-l-none sm:transition-transform sm:duration-300 sm:hover:scale-110">
             Album
           </div>
         )}
