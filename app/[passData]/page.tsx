@@ -51,6 +51,7 @@ const Albums = () => {
         : `${baseUrl}?name=arijitsingh`;
       
       const res = await axios.post(url, {}, { withCredentials: true });
+      console.log(res);
       setData(res.data.data);
     } catch (error) {
       toast.error("Failed to fetch data.");

@@ -4,8 +4,7 @@ const AlbumCard = ({ url, name, followers, tracks, passData, spotify }: propData
     return (
       <a 
         href={spotify} 
-        target="_blank" 
-        rel="noopener noreferrer" 
+        target="_blank"
         className="flex sm:flex-col items-center gap-4 rounded-xl bg-gradient-to-tl from-gray-900 to-gray-800 shadow-lg sm:transition-transform sm:duration-300 sm:hover:scale-105 sm:hover:shadow-2xl overflow-hidden">
         {url ? (
           <img 
@@ -15,7 +14,7 @@ const AlbumCard = ({ url, name, followers, tracks, passData, spotify }: propData
           />
         ) : ( 
           <div 
-            className="h-[300px] w-full flex items-center justify-center bg-gradient-to-br from-cyan-700 to-cyan-950 text-2xl font-semibold text-gray-300 rounded-t-xl">
+            className="h-[64px] w-[64px] sm:h-[300px] sm:w-full flex items-center justify-center bg-gradient-to-br from-cyan-700 to-cyan-950 text-2xl font-semibold text-gray-300 rounded-l-xl sm:rounded-t-xl sm:rounded-l-none">
             Album
           </div>
         )}
